@@ -1,6 +1,6 @@
 package com.example.android_assignment2.rest
 
-interface RockClassicPopArtistsMusicService {
+interface ArtistsMusicApi {
 
 
 
