@@ -1,11 +1,10 @@
 package com.example.android_assignment2.rest
 
-import com.example.android_assignment2.models.ArtistsMusicModelList
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface ArtistsMusicApi {
+interface MusicApi {
 
     @GET(MUSIC_GENRE_ROCK)
     fun getRockArtistsMusic(): Single<ArtistsMusicModelList>

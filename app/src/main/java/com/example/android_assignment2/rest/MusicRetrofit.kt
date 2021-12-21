@@ -7,7 +7,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ArtistsMusicRetrofit {
+object MusicRetrofit {
 
     private val okHttpClient by lazy {
         OkHttpClient.Builder()
@@ -19,13 +19,13 @@ object ArtistsMusicRetrofit {
     }
 
 
-    fun getArtistsMusicRetrofit() : ArtistsMusicApi{
+    fun getArtistsMusicRetrofit() : MusicApi{
         return Retrofit.Builder()
-            .baseUrl(ArtistsMusicApi.BASE_URL)
+            .baseUrl(MusicApi.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(ArtistsMusicApi::class.java)
+            .create(MusicApi::class.java)
     }
 }

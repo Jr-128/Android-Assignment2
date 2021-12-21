@@ -2,8 +2,9 @@ package com.example.android_assignment2.presenters
 
 import android.util.Log
 
-class ArtistsMusicPresenter : IArtistMusicPresenter {
+class ClassicMusicPresenter : IArtistMusicPresenter {
     override fun getArtistMusicPresenter(){
+        //TODO need to get the artist and log response
         Log.d("TAG", "message")
     }
 }
@@ -13,6 +14,6 @@ interface IArtistMusicPresenter{
 }
 
 interface IArtistMusicView{
-
+    fun showArtistMusic()
 }
 
