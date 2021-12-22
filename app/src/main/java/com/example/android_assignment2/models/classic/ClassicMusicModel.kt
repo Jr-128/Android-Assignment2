@@ -7,5 +7,5 @@ data class ClassicMusicModel(
     @SerializedName("resultCount")
     val resultCount: Int,
     @SerializedName("results")
-    val classicMusicModelResults: List<ClassicMusicModelResult>
+    val classicMusicList: List<ClassicMusic>
 )

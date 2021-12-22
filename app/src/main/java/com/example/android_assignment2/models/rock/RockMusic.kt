@@ -1,9 +1,9 @@
-package com.example.android_assignment2.models.pop
+package com.example.android_assignment2.models.rock
 
 
 import com.google.gson.annotations.SerializedName
 
-data class PopMusicModelResult(
+data class RockMusic(
     @SerializedName("artistId")
     val artistId: Int,
     @SerializedName("artistName")

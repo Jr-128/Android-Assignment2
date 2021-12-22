@@ -3,8 +3,11 @@ package com.example.android_assignment2.presenters
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import com.example.android_assignment2.models.classic.ClassicMusic
 import com.example.android_assignment2.rest.MusicApi
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -43,7 +46,19 @@ class ClassicMusicPresenter @Inject constructor(
         //finally subscribing to receive the response and get the data
         if (isNetworkAvailable){
             val musicDisposable = musicApi
-
+                .getClassicMusic()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    //Updated view when success occurs
+                    { music ->
+                        iClassicMusicViewContract?.onSuccessMusicData(music.classicMusicList)
+                    },
+                    //Update view when error occurs
+                    { throwable ->
+                        iClassicMusicViewContract?.onErrorMusicData(throwable)
+                    }
+                )
         }
     }
 
@@ -88,7 +103,7 @@ interface IClassicMusicPresenter{
 
 interface IClassicMusicView{
     //Method returns the success response to the view
-    fun onSuccessMusicData()
+    fun onSuccessMusicData(classicMusicList: List<ClassicMusic>)
 
     //Method returns the error response to the view
     fun onErrorMusicData(error: Throwable)

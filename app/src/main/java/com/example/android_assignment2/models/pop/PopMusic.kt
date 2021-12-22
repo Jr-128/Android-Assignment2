@@ -1,11 +1,9 @@
-package com.example.android_assignment2.models.classic
+package com.example.android_assignment2.models.pop
 
 
 import com.google.gson.annotations.SerializedName
 
-data class ClassicMusicModelResult(
-    @SerializedName("amgArtistId")
-    val amgArtistId: Int,
+data class PopMusic(
     @SerializedName("artistId")
     val artistId: Int,
     @SerializedName("artistName")
@@ -18,18 +16,10 @@ data class ClassicMusicModelResult(
     val artworkUrl30: String,
     @SerializedName("artworkUrl60")
     val artworkUrl60: String,
-    @SerializedName("collectionArtistId")
-    val collectionArtistId: Int,
-    @SerializedName("collectionArtistName")
-    val collectionArtistName: String,
-    @SerializedName("collectionArtistViewUrl")
-    val collectionArtistViewUrl: String,
     @SerializedName("collectionCensoredName")
     val collectionCensoredName: String,
     @SerializedName("collectionExplicitness")
     val collectionExplicitness: String,
-    @SerializedName("collectionHdPrice")
-    val collectionHdPrice: Double,
     @SerializedName("collectionId")
     val collectionId: Int,
     @SerializedName("collectionName")
@@ -40,44 +30,30 @@ data class ClassicMusicModelResult(
     val collectionViewUrl: String,
     @SerializedName("contentAdvisoryRating")
     val contentAdvisoryRating: String,
-    @SerializedName("copyright")
-    val copyright: String,
     @SerializedName("country")
     val country: String,
     @SerializedName("currency")
     val currency: String,
-    @SerializedName("description")
-    val description: String,
     @SerializedName("discCount")
     val discCount: Int,
     @SerializedName("discNumber")
     val discNumber: Int,
-    @SerializedName("hasITunesExtras")
-    val hasITunesExtras: Boolean,
     @SerializedName("isStreamable")
     val isStreamable: Boolean,
     @SerializedName("kind")
     val kind: String,
-    @SerializedName("longDescription")
-    val longDescription: String,
     @SerializedName("previewUrl")
     val previewUrl: String,
     @SerializedName("primaryGenreName")
     val primaryGenreName: String,
     @SerializedName("releaseDate")
     val releaseDate: String,
-    @SerializedName("shortDescription")
-    val shortDescription: String,
     @SerializedName("trackCensoredName")
     val trackCensoredName: String,
     @SerializedName("trackCount")
     val trackCount: Int,
     @SerializedName("trackExplicitness")
     val trackExplicitness: String,
-    @SerializedName("trackHdPrice")
-    val trackHdPrice: Double,
-    @SerializedName("trackHdRentalPrice")
-    val trackHdRentalPrice: Double,
     @SerializedName("trackId")
     val trackId: Int,
     @SerializedName("trackName")
@@ -86,8 +62,6 @@ data class ClassicMusicModelResult(
     val trackNumber: Int,
     @SerializedName("trackPrice")
     val trackPrice: Double,
-    @SerializedName("trackRentalPrice")
-    val trackRentalPrice: Double,
     @SerializedName("trackTimeMillis")
     val trackTimeMillis: Int,
     @SerializedName("trackViewUrl")

@@ -7,5 +7,5 @@ data class PopMusicModel(
     @SerializedName("resultCount")
     val resultCount: Int,
     @SerializedName("results")
-    val popMusicModelResults: List<PopMusicModelResult>
+    val popMusicList: List<PopMusic>
 )

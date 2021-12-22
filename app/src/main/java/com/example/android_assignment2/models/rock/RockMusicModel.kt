@@ -7,5 +7,5 @@ data class RockMusicModel(
     @SerializedName("resultCount")
     val resultCount: Int,
     @SerializedName("results")
-    val rockMusicModelResults: List<RockMusicModelResult>
+    val rockMusicList: List<RockMusic>
 )
