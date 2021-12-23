@@ -98,6 +98,10 @@ interface IClassicMusicPresenter{
 
     //This method destroys the presenter
     fun destroyPresenter()
+
+    //This method will be called to swipe to refresh the screen
+    //may need to move it to the view contract
+    //fun refresh()
 }
 
 

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.android_assignment2.R
+import com.example.android_assignment2.presenters.IClassicMusicPresenter
+import com.example.android_assignment2.presenters.IClassicMusicView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,7 +19,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [ClassicFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ClassicFragment : Fragment() {
+class ClassicFragment : IClassicMusicPresenter, Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -56,5 +58,21 @@ class ClassicFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun initClassicPresenter(viewContract: IClassicMusicView) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getClassicMusicFromServer() {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkNetworkState() {
+        TODO("Not yet implemented")
+    }
+
+    override fun destroyPresenter() {
+        TODO("Not yet implemented")
     }
 }

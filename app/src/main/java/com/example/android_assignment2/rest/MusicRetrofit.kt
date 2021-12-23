@@ -18,8 +18,9 @@ object MusicRetrofit {
             .build()
     }
 
-
-    fun getArtistsMusicRetrofit() : MusicApi{
+    //Creating retrofit builder and my network API.
+    fun getArtistsMusicRetrofit() : MusicApi {
+        //Creating the object step by step w/ setter methods to add specific data
         return Retrofit.Builder()
             .baseUrl(MusicApi.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -28,4 +29,5 @@ object MusicRetrofit {
             .build()
             .create(MusicApi::class.java)
     }
+
 }

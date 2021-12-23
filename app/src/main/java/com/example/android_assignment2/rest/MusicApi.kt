@@ -2,7 +2,9 @@ package com.example.android_assignment2.rest
 
 import com.example.android_assignment2.models.classic.ClassicMusicModel
 import com.example.android_assignment2.models.pop.PopMusic
+import com.example.android_assignment2.models.pop.PopMusicModel
 import com.example.android_assignment2.models.rock.RockMusic
+import com.example.android_assignment2.models.rock.RockMusicModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,10 +14,10 @@ interface MusicApi {
     fun getClassicMusic(): Single<ClassicMusicModel>
 
     @GET(MUSIC_GENRE_ROCK)
-    fun getRockMusic(): Single<PopMusic>
+    fun getRockMusic(): Single<PopMusicModel>
 
     @GET(MUSIC_GENRE_POP)
-    fun getPopMusic(): Single<RockMusic>
+    fun getPopMusic(): Single<RockMusicModel>
 
     fun getClassicMusic(
         @Query("term") musicGenre: String = MUSIC_GENRE_CLASSIC,

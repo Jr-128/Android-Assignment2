@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import javax.inject.Inject
 
 
-class ArtistsMusicAdapter @Inject constructor(
+class ClassicMusicAdapter @Inject constructor(
     val fragmentManager: FragmentManager,
     val lifecycle : Lifecycle
     ): FragmentStateAdapter(fragmentManager, lifecycle){
