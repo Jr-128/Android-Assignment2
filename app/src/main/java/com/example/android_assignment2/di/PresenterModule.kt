@@ -19,7 +19,10 @@ class PresenterModule {
      * @param connectivityManager Manager to check the network connection
      */
     @Provides
-    fun provideClassicMusicPresenter(musicApi: MusicApi, connectivityManager: ConnectivityManager) =
+    fun provideClassicMusicPresenter(
+        musicApi: MusicApi,
+        connectivityManager: ConnectivityManager
+    ): IClassicMusicPresenter =
         ClassicMusicPresenter(musicApi, connectivityManager)
 
 

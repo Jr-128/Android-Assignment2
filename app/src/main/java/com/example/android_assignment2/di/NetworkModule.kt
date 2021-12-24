@@ -46,6 +46,7 @@ class NetworkModule {
     @Singleton
     fun provideNetworkApi(okHttpClient: OkHttpClient): MusicApi =
         Retrofit.Builder()
+            .baseUrl(MusicApi.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
