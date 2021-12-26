@@ -1,14 +1,21 @@
 package com.example.android_assignment2
 
 import android.app.Application
+import com.example.android_assignment2.di.AppModule
+import com.example.android_assignment2.di.DaggerMusicAppComponent
 import com.example.android_assignment2.di.MusicAppComponent
 
-class MusicApp:Application() {
+class MusicApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        musicAppComponent
+        musicAppComponent = DaggerMusicAppComponent
+            .builder()
+            // I create the app module to be used
+            .appModule(AppModule(this))
+            // i build the dagger component
+            .build()
     }
 
     companion object{
@@ -17,3 +24,4 @@ class MusicApp:Application() {
         lateinit var musicAppComponent: MusicAppComponent
     }
 }
+

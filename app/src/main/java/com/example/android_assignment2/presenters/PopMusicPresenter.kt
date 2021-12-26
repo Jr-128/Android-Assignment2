@@ -1,8 +1,29 @@
 package com.example.android_assignment2.presenters
 
+import android.net.ConnectivityManager
 import com.example.android_assignment2.models.pop.PopMusic
+import com.example.android_assignment2.rest.MusicApi
+import javax.inject.Inject
 
-class PopMusicPresenter {
+class PopMusicPresenter  @Inject constructor(
+    var musicApi: MusicApi,
+    var connectivityManager: ConnectivityManager
+): IPopMusicPresenter{
+    override fun initPopPresenter(viewContract: IPopMusicView) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPopMusicFromServer() {
+        TODO("Not yet implemented")
+    }
+
+    override fun checkNetworkState() {
+        TODO("Not yet implemented")
+    }
+
+    override fun destroyPresenter() {
+        TODO("Not yet implemented")
+    }
 
 }
 

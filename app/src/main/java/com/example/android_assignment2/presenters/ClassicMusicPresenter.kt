@@ -43,7 +43,7 @@ class ClassicMusicPresenter @Inject constructor(
         //Here we retrieve the classic music from server
         //then change to a worker thread aside from the main thread
         //observing the response on the main thread
-        //finally subscribing to receive the response and get the data
+        //finally subscribing to recei  ve the response and get the data
         if (isNetworkAvailable){
             val musicDisposable = musicApi
                 .getClassicMusic()
@@ -51,8 +51,8 @@ class ClassicMusicPresenter @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     //Updated view when success occurs
-                    { music ->
-                        iClassicMusicViewContract?.onSuccessMusicData(music.classicMusicList)
+                    { classicMusicList ->
+                        iClassicMusicViewContract?.onSuccessMusicData(classicMusicList.classicMusicList)
                     },
                     //Update view when error occurs
                     { throwable ->

@@ -34,6 +34,7 @@ android {
     buildFeatures{
         viewBinding true
     }
+
 }
 
 dependencies {
@@ -63,7 +64,7 @@ dependencies {
 
     // this is for Dagger2 dependency injection
     implementation 'com.google.dagger:dagger:2.28.3'
-    //kapt 'com.google.dagger:dagger-compiler:2.13'
+    kapt 'com.google.dagger:dagger-compiler:2.13'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
