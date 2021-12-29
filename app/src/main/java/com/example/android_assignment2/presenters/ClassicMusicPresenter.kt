@@ -59,6 +59,8 @@ class ClassicMusicPresenter @Inject constructor(
                         iClassicMusicViewContract?.onErrorMusicData(throwable)
                     }
                 )
+
+            disposable.add(musicDisposable)
         }
     }
 
@@ -86,7 +88,7 @@ class ClassicMusicPresenter @Inject constructor(
     }
 }
 
-interface IClassicMusicPresenter{
+interface IClassicMusicPresenter {
     //This method will initialize the presenter
     fun initClassicPresenter(viewContract: IClassicMusicView)
 

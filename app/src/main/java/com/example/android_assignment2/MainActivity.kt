@@ -2,7 +2,7 @@ package com.example.android_assignment2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.android_assignment2.adpater.FragmentsAdapter
+import com.example.android_assignment2.adpater.MusicGenreAdapter
 import com.example.android_assignment2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         MusicApp.musicAppComponent.inject(this)
 
-        binding.myContainerViewPager2.adapter = FragmentsAdapter(supportFragmentManager, lifecycle)
+        binding.myContainerViewPager2.adapter = MusicGenreAdapter(supportFragmentManager, lifecycle)
 
         TabLayoutMediator(binding.myTabLayout, binding.myContainerViewPager2) { tab, position ->
             when(position){

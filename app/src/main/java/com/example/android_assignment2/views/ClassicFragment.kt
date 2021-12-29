@@ -48,8 +48,8 @@ class ClassicFragment : Fragment(), IClassicMusicView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter.initClassicPresenter(this)
-        presenter.checkNetworkState()
+        classicPresenter.initClassicPresenter(this)
+        classicPresenter.checkNetworkState()
     }
 
     override fun onCreateView(
@@ -67,7 +67,7 @@ class ClassicFragment : Fragment(), IClassicMusicView {
         // this method will allow us to retrieve data from server
         // and the result will be posted into the view contract by the methods
         // character updated and onError data
-        presenter.getClassicMusicFromServer()
+        classicPresenter.getClassicMusicFromServer()
     }
 
 
@@ -86,7 +86,7 @@ class ClassicFragment : Fragment(), IClassicMusicView {
     override fun onDestroyView() {
         super.onDestroyView()
         // this method will clear the disposable from the presenter
-        presenter.destroyPresenter()
+        classicPresenter.destroyPresenter()
     }
 
     companion object {

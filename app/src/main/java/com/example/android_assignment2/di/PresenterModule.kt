@@ -2,6 +2,7 @@ package com.example.android_assignment2.di
 
 import android.net.ConnectivityManager
 import com.example.android_assignment2.presenters.ClassicMusicPresenter
+import com.example.android_assignment2.presenters.IClassicMusicPresenter
 import com.example.android_assignment2.presenters.PopMusicPresenter
 import com.example.android_assignment2.presenters.RockMusicPresenter
 import com.example.android_assignment2.rest.MusicApi
@@ -27,11 +28,15 @@ class PresenterModule {
 
 
     @Provides
-    fun provideRockMusicPresenter(musicApi: MusicApi, connectivityManager: ConnectivityManager) =
-        RockMusicPresenter(musicApi, connectivityManager)
+    fun provideRockMusicPresenter(
+        musicApi: MusicApi,
+        connectivityManager: ConnectivityManager
+    ) = RockMusicPresenter(musicApi, connectivityManager)
 
 
     @Provides
-    fun providePopMusicPresenter(musicApi: MusicApi, connectivityManager: ConnectivityManager) =
-        PopMusicPresenter(musicApi, connectivityManager)
+    fun providePopMusicPresenter(
+        musicApi: MusicApi,
+        connectivityManager: ConnectivityManager
+    ) = PopMusicPresenter(musicApi, connectivityManager)
 }
