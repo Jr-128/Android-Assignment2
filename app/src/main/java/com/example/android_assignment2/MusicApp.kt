@@ -24,4 +24,3 @@ class MusicApp : Application() {
         lateinit var musicAppComponent: MusicAppComponent
     }
 }
-
