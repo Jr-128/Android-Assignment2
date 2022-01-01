@@ -1,6 +1,7 @@
 package com.example.android_assignment2.di
 
 import com.example.android_assignment2.rest.MusicApi
+import com.example.android_assignment2.rest.MusicRetrofit
 
 import dagger.Module
 import dagger.Provides
@@ -46,6 +47,7 @@ class NetworkModule {
     @Singleton
     fun provideNetworkApi(okHttpClient: OkHttpClient): MusicApi =
         Retrofit.Builder()
+            .baseUrl(MusicApi.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
