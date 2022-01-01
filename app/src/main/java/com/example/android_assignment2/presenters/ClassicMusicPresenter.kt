@@ -4,6 +4,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import com.example.android_assignment2.models.classic.ClassicMusic
+import com.example.android_assignment2.models.classic.ClassicMusicModel
 import com.example.android_assignment2.rest.MusicApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -43,7 +44,7 @@ class ClassicMusicPresenter @Inject constructor(
         //Here we retrieve the classic music from server
         //then change to a worker thread aside from the main thread
         //observing the response on the main thread
-        //finally subscribing to recei  ve the response and get the data
+        //finally subscribing to receive the response and get the data
         if (isNetworkAvailable){
             val musicDisposable = musicApi
                 .getClassicMusic()
@@ -52,13 +53,14 @@ class ClassicMusicPresenter @Inject constructor(
                 .subscribe(
                     //Updated view when success occurs
                     { classicMusicList ->
-                        iClassicMusicViewContract?.onSuccessMusicData(classicMusicList.classicMusicList)
+                        iClassicMusicViewContract?.onSuccessMusicData(classicMusicList)
                     },
                     //Update view when error occurs
                     { throwable ->
                         iClassicMusicViewContract?.onErrorMusicData(throwable)
                     }
                 )
+            disposable.add(musicDisposable)
         }
     }
 
@@ -107,7 +109,7 @@ interface IClassicMusicPresenter{
 
 interface IClassicMusicView{
     //Method returns the success response to the view
-    fun onSuccessMusicData(classicMusicList: List<ClassicMusic>)
+    fun onSuccessMusicData(classicMusicList: ClassicMusicModel)
 
     //Method returns the error response to the view
     fun onErrorMusicData(error: Throwable)
