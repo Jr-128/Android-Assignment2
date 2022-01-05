@@ -6,20 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_assignment2.R
-import com.example.android_assignment2.databinding.ArtistFragmentBinding
 import com.example.android_assignment2.models.classic.ClassicMusic
-import com.example.android_assignment2.models.classic.ClassicMusicModel
 import javax.inject.Inject
 
 
 class ClassicMusicAdapter @Inject constructor(
     private val iPreviewSongClick: IPreviewSongClick,
-    private val classicMusicModelList: MutableList<ClassicMusic> = mutableListOf()
+    private val classicMusicList: MutableList<ClassicMusic> = mutableListOf()
 ) : RecyclerView.Adapter<ClassicMusicViewHolder>() {
 
-    fun updateClassicMusic(classicMusicModel: ClassicMusicModel){
-        classicMusicModelList.clear()
-        classicMusicModelList.addAll(classicMusicModel.classicMusicList)
+    fun updateClassicMusic(classicMusicList2: List<ClassicMusic>){
+        classicMusicList.clear()
+        classicMusicList.addAll(classicMusicList2)
         notifyDataSetChanged()
     }
 
@@ -35,7 +33,7 @@ class ClassicMusicAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: ClassicMusicViewHolder, position: Int) {
         //Creating a variable to hold reference to the classicMusicModelList object
-        val classic = classicMusicModelList[position]
+        val classic = classicMusicList[position]
 
         //Setting values to the view holder
         holder.artistName.text = classic.artistName
@@ -43,12 +41,16 @@ class ClassicMusicAdapter @Inject constructor(
         holder.artworkUrl60.text = classic.artworkUrl60
         holder.trackPrice.text = classic.trackPrice.toString()
 
-        holder.itemView.setOnClickListener{
+        holder.previewSongUrl.setOnClickListener{
+            iPreviewSongClick.previewSongClick(classic.previewUrl)
+        }
+
+        holder.itemView.setOnClickListener {
             iPreviewSongClick.previewSongClick(classic.previewUrl)
         }
     }
 
-    override fun getItemCount(): Int =  classicMusicModelList.size
+    override fun getItemCount(): Int =  classicMusicList.size
 
 }
 

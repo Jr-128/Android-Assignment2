@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.net.ConnectivityManager
+import androidx.room.Room
+import com.example.android_assignment2.database.ClassicMusicDatabase
+import com.example.android_assignment2.database.PopMusicDatabase
+import com.example.android_assignment2.database.RockMusicDatabase
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -27,4 +31,34 @@ class AppModule(private val application: Application) {
     @Singleton
     fun provideConnectivityManager(context: Context): ConnectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    @Provides
+    @Singleton
+    fun provideClassicMusicDatabase(context: Context): ClassicMusicDatabase {
+        return Room.databaseBuilder(
+            context,
+            ClassicMusicDatabase::class.java,
+            "classicMusic-db"
+        )
+            .build()
+    }
+        @Provides
+        @Singleton
+        fun provideRockMusicDatabase(context: Context): RockMusicDatabase {
+            return Room.databaseBuilder(
+                context,
+                RockMusicDatabase::class.java,
+                "rockMusic-db")
+                .build()
+    }
+
+        @Provides
+        @Singleton
+        fun providePopMusicDatabase(context: Context): PopMusicDatabase {
+            return Room.databaseBuilder(
+                context,
+                PopMusicDatabase::class.java,
+                "popMusic-db")
+                .build()
+        }
 }

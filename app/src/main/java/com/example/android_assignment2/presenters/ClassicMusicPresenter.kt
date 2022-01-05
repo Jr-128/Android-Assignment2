@@ -3,8 +3,8 @@ package com.example.android_assignment2.presenters
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import com.example.android_assignment2.database.ClassicMusicDatabase
 import com.example.android_assignment2.models.classic.ClassicMusic
-import com.example.android_assignment2.models.classic.ClassicMusicModel
 import com.example.android_assignment2.rest.MusicApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,7 +17,8 @@ import javax.inject.Inject
  */
 class ClassicMusicPresenter @Inject constructor(
     var musicApi: MusicApi,
-    var connectivityManager: ConnectivityManager
+    var connectivityManager: ConnectivityManager,
+    var classicMusicDatabase: ClassicMusicDatabase
 ) : IClassicMusicPresenter {
 
     //Nullable variable to hold the view contract
@@ -40,27 +41,31 @@ class ClassicMusicPresenter @Inject constructor(
      * This method retrieves the data from server overridden from the
      * presenter contract.
      */
-    override fun getClassicMusicFromServer(){
+    override fun getClassicMusicFromServer() {
+
         //Here we retrieve the classic music from server
         //then change to a worker thread aside from the main thread
         //observing the response on the main thread
         //finally subscribing to receive the response and get the data
-        if (isNetworkAvailable){
+        if (isNetworkAvailable) {
             val musicDisposable = musicApi
                 .getClassicMusic()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     //Updated view when success occurs
-                    { classicMusicList ->
-                        iClassicMusicViewContract?.onSuccessMusicData(classicMusicList)
+                    {
+                        iClassicMusicViewContract?.onSuccessMusicData(it.classicMusicList)
+
                     },
                     //Update view when error occurs
-                    { throwable ->
-                        iClassicMusicViewContract?.onErrorMusicData(throwable)
+                    {
+                        iClassicMusicViewContract?.onErrorMusicData(it)
                     }
                 )
             disposable.add(musicDisposable)
+        } else {
+            iClassicMusicViewContract?.onErrorNetwork()
         }
     }
 
@@ -70,7 +75,7 @@ class ClassicMusicPresenter @Inject constructor(
         isNetworkAvailable = getActiveNetworkCapabilities()?.let {
             it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                     it.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        }?: false
+        } ?: false
     }
 
 
@@ -80,6 +85,37 @@ class ClassicMusicPresenter @Inject constructor(
         iClassicMusicViewContract = null
     }
 
+    override fun saveClassicsToDb(classicsToSave: List<ClassicMusic>) {
+        // Here I am going to use RxJava to change to a worker thread
+        val classicMusicDatabaseDisposable = classicMusicDatabase
+            .getClassicsDao()
+            .insertClassics(classicsToSave)
+            .subscribeOn(Schedulers.io())
+            .subscribe(
+                { Log.d("success", "presenter's saveClassicsToDb() successful") },
+                { Log.e("error", "saveClassicsToDb() error: "+ it.localizedMessage) }
+            )
+        disposable.add(classicMusicDatabaseDisposable)
+    }
+
+    override fun getLocalClassics() {
+        Log.d("getLocalClassics", "presenter getLocalClassics called")
+        val classicMusicDatabaseDisposable = classicMusicDatabase
+            .getClassicsDao()
+            .getClassicsFromDb()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    iClassicMusicViewContract?.onSuccessMusicData(it)
+                    Log.d("success", "Retrieved classics, updating the view")
+                },
+                { Log.e("error", "ERROR in presenter's getLocalClassics()") }
+            )
+        disposable.add(classicMusicDatabaseDisposable)
+    }
+
+
     //This method will get the network capabilities from the connectivity manager
     private fun getActiveNetworkCapabilities(): NetworkCapabilities? {
         return connectivityManager.activeNetwork.let {
@@ -88,7 +124,7 @@ class ClassicMusicPresenter @Inject constructor(
     }
 }
 
-interface IClassicMusicPresenter{
+interface IClassicMusicPresenter {
     //This method will initialize the presenter
     fun initClassicPresenter(viewContract: IClassicMusicView)
 
@@ -101,17 +137,26 @@ interface IClassicMusicPresenter{
     //This method destroys the presenter
     fun destroyPresenter()
 
+    //This method saves the data to the server
+    fun saveClassicsToDb(classicsToSave: List<ClassicMusic>)
+
+    //This method gets the data saved on the server
+    fun getLocalClassics()
+
     //This method will be called to swipe to refresh the screen
     //may need to move it to the view contract
     //fun refresh()
 }
 
 
-interface IClassicMusicView{
+interface IClassicMusicView {
     //Method returns the success response to the view
-    fun onSuccessMusicData(classicMusicList: ClassicMusicModel)
+    fun onSuccessMusicData(classicMusicList: List<ClassicMusic>)
 
     //Method returns the error response to the view
     fun onErrorMusicData(error: Throwable)
+
+    //Method returns the error response to the view
+    fun onErrorNetwork()
 }
 

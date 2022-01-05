@@ -5,9 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".views.PopFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pop_fragment_RecyclerView"
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pop_swipe"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pop_fragment_RecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>
